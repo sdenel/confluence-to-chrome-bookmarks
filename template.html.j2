@@ -1,0 +1,16 @@
+{% macro generate_page_subtree(page) -%}
+<DT><A HREF="{{ confluence_base_url }}/pages/viewpage.action?pageId={{ page.id }}" ICON="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACMElEQVQ4jX2TTU8TURSGn3PnzrRFtAJRTNBUWr8WbogLExIThSiiicEFf8SdH5BaCFF/hQt3JBhDlPgTTDTGpUopLBFQQpF2Zu7McUEkfBTO+j5P3nPuOdCqRtUD6BlvDF6oaB8AZTUt3x4GM/L1ZuF5XL/8UheLE3rxMIk5AE9LwsNvA0G+450Vrz1NKdiAj8UpvURZ0v0Ssx8++ah+69ip7hlrkhPGSIwjVqXXesy1kpjdcKGsA8fbsm+zGZOHNI7DyBeDr5HGqhRbSYSyGsqS9k7pDd9j1jU1H25uxI1G5BtrNjpOd/mo5kglwicQYcElDC88kR+U1QhAaVL7vQyzGtGpSeoUbBhTX1v+c7un2HVGhBkcQorDxxehlqTcqT6WeSlMan9g+YAjj6pTI8ZYVqOQB4vj8gmgNKEjns8bdeSABG9bEnoMGg8ihBABEEVBAc9idwYs5BWMAiiIgEJkhFQAChXty2SZU0c3jhiLL5a/sWO4sd4stndmX0uCakJsAgLge+wYqj2TpZ0hlip6zcvwXhO6cUR4BApbm2vrGWONyeXaYi9nAxV+RhFDS2NSAzWGsqSMqlcdly9JyH3xWMYSaEpslLYglzHNet2FjiBNtJo2uLc0JrXtb5TtFnbvwp4kCS5NnK4s//aDTLYq2czdlRfZ+f+p927itCT7kvwSi03F+uFWs1qvbxyAjzymwpj2XXmlq2efbi0w/Ll02DEdKTlf0evnyuHVo+B/SEUktAYiEfYAAAAASUVORK5CYII=">{{ page.title }}</A>
+{% if page.children | length > 0 %}
+<DT><H3>{{ page.title }} - subpages ({{ page.children | length }})</H3>
+<DL><p>
+{% for child in page.children %}
+{{ generate_page_subtree(child) }}
+{% endfor %}
+</DL><p>
+{%- endif %}
+{%- endmacro -%}
+<!DOCTYPE NETSCAPE-Bookmark-file-1>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>Generated bookmarks</TITLE>
+<H1>Generated bookmarks</H1>
+{{ generate_page_subtree(page) }}
